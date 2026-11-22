@@ -1,0 +1,84 @@
+[importlinter]
+root_package = app
+include_external_packages = True
+
+# Presentación -> casos de uso -> dominio.
+# La infraestructura es hermana de los servicios: ambos dependen del dominio.
+# El ensamblado concreto vive en app.api.dependencias y app.ensamblado.
+[importlinter:contract:capas]
+name = Capas de la aplicación
+type = layers
+layers =
+    app.api
+    app.servicios
+    app.dominio
+
+# El dominio es puro: ni SQLAlchemy, ni FastAPI, ni Pydantic.
+[importlinter:contract:dominio-puro]
+name = El dominio no depende de frameworks
+type = forbidden
+source_modules =
+    app.dominio
+forbidden_modules =
+    sqlalchemy
+    fastapi
+    pydantic
+    pydantic_settings
+    jwt
+    argon2
+    app.configuracion
+    app.api
+    app.servicios
+    app.infraestructura
+
+# Los servicios solo conocen puertos y entidades. No importan adaptadores.
+[importlinter:contract:servicios-sin-infra]
+name = Los servicios no conocen la infraestructura ni la API
+type = forbidden
+source_modules =
+    app.servicios
+forbidden_modules =
+    app.infraestructura
+    app.api
+    app.configuracion
+    sqlalchemy
+    fastapi
+    pydantic
+    pydantic_settings
+    jwt
+    argon2
+
+# Los adaptadores no suben hacia casos de uso ni HTTP.
+[importlinter:contract:infra-no-sube]
+name = La infraestructura no conoce servicios ni API
+type = forbidden
+source_modules =
+    app.infraestructura
+forbidden_modules =
+    app.servicios
+    app.api
+
+# Ensamblado es raíz de composición: dominio/servicios/infra no lo importan.
+[importlinter:contract:ensamblado-raiz]
+name = El ensamblado no es importado por dominio, servicios ni infraestructura
+type = forbidden
+source_modules =
+    app.dominio
+    app.servicios
+    app.infraestructura
+forbidden_modules =
+    app.ensamblado
+
+# Los routers no tocan la base: solo dependencias.py ensambla persistencia.
+[importlinter:contract:api-sin-base-de-datos]
+name = La API no accede a la base de datos directamente
+type = forbidden
+source_modules =
+    app.api
+forbidden_modules =
+    app.infraestructura.persistencia.modelos
+    app.infraestructura.persistencia.repositorios
+allow_indirect_imports = True
+ignore_imports =
+    app.api.dependencias -> app.infraestructura.persistencia.modelos
+    app.api.dependencias -> app.infraestructura.persistencia.repositorios

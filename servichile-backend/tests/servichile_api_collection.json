@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "ServiChile API v1",
+    "description": "Ejecute las peticiones en orden. Login guarda el token en la variable {{token}}. El registro acepta 201 (nuevo) o 409 (ya existía), para poder repetir la demostración.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "email",
+      "value": "demo@servichile.cl"
+    },
+    {
+      "key": "password",
+      "value": "clave-demo-123"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Salud",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('estado ok', () => pm.expect(pm.response.json().estado).to.eql('ok'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/salud"
+      }
+    },
+    {
+      "name": "2. Registro",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('201 creado o 409 ya registrado', () => pm.expect(pm.response.code).to.be.oneOf([201, 409]));",
+              "if (pm.response.code === 201) {",
+              "  pm.test('no expone el hash', () => pm.expect(pm.response.json()).to.not.have.property('password_hash'));",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/auth/registro",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"nombre\": \"María González\",\n  \"password\": \"{{password}}\",\n  \"perfil\": {\n    \"edad\": 68,\n    \"tipo_cuenta\": \"persona\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "3. Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('token bearer', () => pm.expect(pm.response.json().token_type).to.eql('bearer'));",
+              "pm.collectionVariables.set('token', pm.response.json().access_token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "4. Mi perfil",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('correo de la sesión', () => pm.expect(pm.response.json().email).to.eql(pm.collectionVariables.get('email')));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/v1/auth/yo"
+      }
+    },
+    {
+      "name": "4b. Actualizar perfil teléfono (PATCH)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('actualizó teléfono', () => { const p = pm.response.json(); pm.expect(p.telefono).to.eql('+56912345678'); pm.expect(p).to.have.property('edad'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/perfil",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"telefono\": \"+56 9 1234 5678\"\n}"
+        }
+      }
+    },
+    {
+      "name": "8. Error: clave incorrecta (401 genérico)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('401', () => pm.response.to.have.status(401));",
+              "pm.test('mensaje genérico', () => pm.expect(pm.response.json().detail).to.eql('Correo o contraseña incorrectos.'));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"clave-equivocada\"\n}"
+        }
+      }
+    }
+  ]
+}

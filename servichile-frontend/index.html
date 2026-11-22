@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ServiChile: catálogo B2B e índice de transparencia de proveedores.">
+  <meta name="theme-color" content="#2563EB">
+  
+  <meta name="servichile-api-base" content="">
+  <title>ServiChile</title>
+  <script>
+    window.SERVICHILE_APP_VERSION = '228';
+    (function () {
+      try {
+        var raw = sessionStorage.getItem('servichile.session');
+        if (!raw) {
+          raw = localStorage.getItem('servichile.session');
+          if (raw) {
+            localStorage.removeItem('servichile.session');
+            sessionStorage.setItem('servichile.session', raw);
+          }
+        }
+        if (raw && JSON.parse(raw).token) {
+          document.documentElement.classList.add('boot-authed');
+        }
+      } catch (e) {}
+    })();
+</script>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%232563EB'/%3E%3Ctext x='50' y='65' font-size='45' text-anchor='middle' fill='white' font-family='Arial'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=295">
+</head>
+<body>
+  <div id="authGate" class="auth">
+    <div class="auth__cuerpo">
+    <section class="auth__hero">
+      <div class="auth__hero-figs" aria-hidden="true">
+        <span class="auth-fig auth-fig--ring auth-fig--tl"></span>
+        <span class="auth-fig auth-fig--grid auth-fig--tr"></span>
+        <span class="auth-fig auth-fig--arc auth-fig--bl"></span>
+        <span class="auth-fig auth-fig--dot auth-fig--br"></span>
+        <svg class="auth-fig auth-fig--glyph auth-fig--hero-mid" viewBox="0 0 80 80" focusable="false">
+          <circle cx="40" cy="40" r="28" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+          <circle cx="40" cy="40" r="16" fill="none" stroke="currentColor" stroke-width="2" opacity="0.75"/>
+          <path d="M40 20v20l12 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="auth__columna shell">
+        <div class="auth__intro">
+          <div class="auth__brand">
+            <span class="brand__mark">S</span>
+            <h1 class="auth__title">ServiChile</h1>
+          </div>
+          <p class="auth__subtitle">Catálogo B2B con índice de transparencia</p>
+          <ul class="auth__beneficios">
+            <li class="auth__beneficio">
+              <span class="auth__beneficio-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="6.5"/>
+                  <path d="M16.2 16.2L21 21"/>
+                  <path d="M8.5 11h5M11 8.5v5"/>
+                </svg>
+              </span>
+              <div class="auth__beneficio-copy">
+                <strong class="auth__beneficio-titulo">Compradores</strong>
+                <p class="auth__beneficio-texto">Evalúe proveedores con 22 observables antes de contratar o pagar.</p>
+              </div>
+            </li>
+            <li class="auth__beneficio">
+              <span class="auth__beneficio-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19V5h5l2 3h9v11z"/>
+                  <path d="M9 14l2.2 2.2L16 11.5"/>
+                </svg>
+              </span>
+              <div class="auth__beneficio-copy">
+                <strong class="auth__beneficio-titulo">Pymes B2B</strong>
+                <p class="auth__beneficio-texto">Mejore su nota para no quedar fuera del filtro de grandes cuentas.</p>
+              </div>
+            </li>
+            <li class="auth__beneficio">
+              <span class="auth__beneficio-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2"/>
+                  <rect x="7" y="7" width="4" height="4"/>
+                  <rect x="13" y="7" width="4" height="4"/>
+                  <rect x="7" y="13" width="4" height="4"/>
+                  <path d="M13 13h1.5M16.5 13H18M13 16.5h2M16.5 18H18"/>
+                </svg>
+              </span>
+              <div class="auth__beneficio-copy">
+                <strong class="auth__beneficio-titulo">Validación en terreno</strong>
+                <p class="auth__beneficio-texto">Muestre el QR del reporte en reuniones, obras o entregas.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="auth__card">
+          <form id="loginForm" class="auth__form" novalidate>
+            <div class="field">
+              <label class="field__label" for="loginEmail">Correo electrónico</label>
+              <input id="loginEmail" class="field__input" name="email" type="email" autocomplete="username" required placeholder="correo@ejemplo.cl">
+            </div>
+            <div class="field">
+              <label class="field__label" for="loginPassword">Contraseña</label>
+              <input id="loginPassword" class="field__input" name="password" type="password" autocomplete="current-password" required>
+            </div>
+            <button class="submit-btn" type="submit">Entrar</button>
+            <p id="loginStatus" class="status-text status-text--sm auth__status" role="alert" aria-live="assertive"></p>
+            <p class="auth__alta">
+              ¿No tiene cuenta?
+              <a class="auth__alta-link" href="./onboarding/">Regístrese aquí</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth__info auth__info--indice-cover" aria-labelledby="authIndiceCoverTitulo">
+      <div class="shell auth__info-inner auth__info-inner--indice-cover">
+        <div class="auth-info__copy">
+          <h2 id="authIndiceCoverTitulo" class="auth-info__heading">El índice, señal por señal</h2>
+          <p class="auth-info__lead">Estrellas y barras que muestran cómo se arma la nota a partir de cada observable.</p>
+          <ul class="auth-info__senales" aria-label="Tipos de señales del índice">
+            <li class="auth-info__senal auth-info__senal--docs">Documentos legales</li>
+            <li class="auth-info__senal auth-info__senal--plataforma">Trabajos concretados</li>
+            <li class="auth-info__senal auth-info__senal--ciber">Ciberseguridad</li>
+            <li class="auth-info__senal auth-info__senal--contractual">Privacidad y condiciones</li>
+            <li class="auth-info__senal auth-info__senal--operativa">Local, teléfono y reseñas</li>
+            <li class="auth-info__senal auth-info__senal--legal">Compras públicas</li>
+          </ul>
+        </div>
+        <aside class="auth-cover-index" aria-hidden="true">
+          <div class="auth-cover-index__rating">
+            <div class="auth-cover-index__stars">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.5L12 16.9 5.99 20.3l1.4-6.5L2.5 9.3l6.6-.7L12 2.5z"/></svg>
+            </div>
+          </div>
+          <ul class="auth-cover-index__lista">
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--docs" style="width:91%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--plataforma" style="width:74%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--operativa" style="width:86%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--legal" style="width:64%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--contractual" style="width:69%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--ciber" style="width:58%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--docs" style="width:81%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--plataforma" style="width:47%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--operativa" style="width:73%"></span></div></li>
+            <li class="auth-cover-index__item"><div class="auth-cover-index__pista"><span class="auth-cover-index__barra auth-cover-index__barra--legal" style="width:55%"></span></div></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="auth__ads" aria-label="Cómo funciona">
+      <div class="auth-info__figs" aria-hidden="true">
+        <span class="auth-fig auth-fig--ring auth-fig--tl"></span>
+        <span class="auth-fig auth-fig--dot auth-fig--tr"></span>
+        <span class="auth-fig auth-fig--slash auth-fig--br"></span>
+        <svg class="auth-fig auth-fig--glyph auth-fig--bl" viewBox="0 0 64 64" focusable="false">
+          <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 33l8 8 16-18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="auth__columna auth__columna--ads shell">
+        <h2 class="auth-flow__heading">Cómo funciona</h2>
+        <ol class="auth-flow">
+          <li class="auth-flow__step">
+            <div class="auth-flow__pin" aria-hidden="true">
+              <svg class="auth-flow__pin-shape" viewBox="0 0 48 64" focusable="false">
+                <path d="M24 0C12.4 0 3 9.4 3 21c0 14.2 16.2 35.4 19.4 39.3a2 2 0 0 0 3.2 0C28.8 56.4 45 35.2 45 21 45 9.4 35.6 0 24 0z"/>
+              </svg>
+              <span class="auth-flow__pin-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="7" y="2.5" width="10" height="19" rx="2"/>
+                  <circle cx="12" cy="17.5" r="1"/>
+                  <path d="M9.5 6h5"/>
+                </svg>
+              </span>
+            </div>
+            <span class="auth-flow__num">1</span>
+            <h3 class="auth-flow__title">Verifíquese</h3>
+            <p class="auth-flow__text">RUT, documentos y transparencia según sea proveedor, contratista o persona.</p>
+          </li>
+          <li class="auth-flow__step">
+            <div class="auth-flow__pin" aria-hidden="true">
+              <svg class="auth-flow__pin-shape" viewBox="0 0 48 64" focusable="false">
+                <path d="M24 0C12.4 0 3 9.4 3 21c0 14.2 16.2 35.4 19.4 39.3a2 2 0 0 0 3.2 0C28.8 56.4 45 35.2 45 21 45 9.4 35.6 0 24 0z"/>
+              </svg>
+              <span class="auth-flow__pin-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                  <path d="M5 19.5c1.2-3 3.7-4.5 7-4.5s5.8 1.5 7 4.5"/>
+                  <path d="M17 7.5h4M19 5.5v4"/>
+                </svg>
+              </span>
+            </div>
+            <span class="auth-flow__num">2</span>
+            <h3 class="auth-flow__title">Publique o postule</h3>
+            <p class="auth-flow__text">Tecnología, industria, construcción y servicios profesionales B2B.</p>
+          </li>
+          <li class="auth-flow__step">
+            <div class="auth-flow__pin" aria-hidden="true">
+              <svg class="auth-flow__pin-shape" viewBox="0 0 48 64" focusable="false">
+                <path d="M24 0C12.4 0 3 9.4 3 21c0 14.2 16.2 35.4 19.4 39.3a2 2 0 0 0 3.2 0C28.8 56.4 45 35.2 45 21 45 9.4 35.6 0 24 0z"/>
+              </svg>
+              <span class="auth-flow__pin-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 14l-2.5 2.5a2.1 2.1 0 0 0 3 3L12 16"/>
+                  <path d="M16 10l2.5-2.5a2.1 2.1 0 0 0-3-3L12 8"/>
+                  <path d="M9.5 14.5l5-5"/>
+                  <path d="M7 11l-1.2-1.2a1.6 1.6 0 0 1 2.3-2.3L9.5 9"/>
+                  <path d="M17 13l1.2 1.2a1.6 1.6 0 0 1-2.3 2.3L14.5 15"/>
+                </svg>
+              </span>
+            </div>
+            <span class="auth-flow__num">3</span>
+            <h3 class="auth-flow__title">Cierre el negocio</h3>
+            <p class="auth-flow__text">Contratista y proveedor se encuentran con transparencia: evalúan, acuerdan y concretan con confianza.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="auth__info auth__info--roles" aria-labelledby="authRolesTitulo">
+      <div class="auth-info__figs" aria-hidden="true">
+        <span class="auth-fig auth-fig--blob auth-fig--tr"></span>
+        <span class="auth-fig auth-fig--diamond auth-fig--bl"></span>
+        <span class="auth-fig auth-fig--ring auth-fig--br"></span>
+        <svg class="auth-fig auth-fig--glyph auth-fig--tl" viewBox="0 0 64 64" focusable="false">
+          <rect x="10" y="14" width="28" height="36" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M16 24h16M16 32h12M16 40h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="46" cy="42" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M46 37v10M41 42h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="shell auth__info-inner">
+        <h2 id="authRolesTitulo" class="auth-info__heading">Para quién es ServiChile</h2>
+        <p class="auth-info__lead">Una misma plataforma para comprar, vender y concretar con datos verificables.</p>
+        <ul class="auth-info__roles">
+          <li class="auth-info__role">
+            <span class="auth-info__role-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="6.5"/>
+                <path d="M16 16l4 4"/>
+                <path d="M8.5 11h5M11 8.5v5"/>
+              </svg>
+            </span>
+            <h3 class="auth-info__role-titulo">Compradores</h3>
+            <p class="auth-info__role-texto">Filtre proveedores B2B, revise el índice de transparencia y compre el informe antes de adjudicar.</p>
+          </li>
+          <li class="auth-info__role">
+            <span class="auth-info__role-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7.5h16v11H4z"/>
+                <path d="M8 7.5V6a4 4 0 0 1 8 0v1.5"/>
+                <path d="M9 12.5h6"/>
+              </svg>
+            </span>
+            <h3 class="auth-info__role-titulo">Proveedores</h3>
+            <p class="auth-info__role-texto">Publique su ficha, suba documentos y mejore su nota para aparecer ante grandes cuentas.</p>
+          </li>
+          <li class="auth-info__role">
+            <span class="auth-info__role-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19V9l8-4 8 4v10"/>
+                <path d="M9 19v-5h6v5"/>
+                <path d="M4 19h16"/>
+              </svg>
+            </span>
+            <h3 class="auth-info__role-titulo">Contratistas</h3>
+            <p class="auth-info__role-texto">Abra un trabajo con el proveedor, muestre el código en terreno y deje trazabilidad del cierre.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="auth__info auth__info--deal" aria-labelledby="authDealTitulo">
+      <div class="shell auth__info-inner auth__info-inner--deal">
+        <div class="auth-info__copy">
+          <h2 id="authDealTitulo" class="auth-info__heading">Contratista y proveedor</h2>
+          <p class="auth-info__lead">Obra, oficina y el reporte que deja la transparencia a la vista antes de concretar.</p>
+        </div>
+        <figure class="auth-deal" aria-hidden="true">
+          <div class="auth-deal__blob">
+            <svg viewBox="0 0 640 420" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="authDealBlobGrad" x1="0.15" y1="0" x2="0.9" y2="1">
+                  <stop offset="0%" stop-color="#DBEAFE"/>
+                  <stop offset="45%" stop-color="#BFDBFE"/>
+                  <stop offset="100%" stop-color="#93C5FD"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#authDealBlobGrad)" d="
+                M 290 22
+                C 348 2, 410 10, 458 38
+                C 508 68, 552 72, 586 108
+                C 622 146, 638 188, 628 236
+                C 618 286, 596 308, 562 342
+                C 526 378, 488 404, 430 412
+                C 372 420, 338 398, 292 402
+                C 244 406, 198 424, 152 402
+                C 104 378, 88 340, 64 298
+                C 38 252, 18 214, 28 168
+                C 38 120, 54 98, 86 72
+                C 122 44, 168 52, 206 40
+                C 236 30, 258 34, 290 22
+                Z
+              "/>
+            </svg>
+          </div>
+          <svg class="auth-deal__frame" viewBox="90 0 560 320" role="img" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="authDealBlue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#60A5FA"/>
+                <stop offset="100%" stop-color="#1E40AF"/>
+              </linearGradient>
+              <linearGradient id="authDealVest" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FBBF24"/>
+                <stop offset="100%" stop-color="#D97706"/>
+              </linearGradient>
+              <linearGradient id="authDealOffice" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#93C5FD"/>
+                <stop offset="100%" stop-color="#2563EB"/>
+              </linearGradient>
+              <linearGradient id="authDealSkin" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FDE68A"/>
+                <stop offset="100%" stop-color="#F59E0B"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(478,-18)" opacity="0.9">
+              <path d="M34 28 L100 4 L166 28 Z" fill="#1E3A8A"/>
+              <rect x="34" y="24" width="132" height="10" rx="3" fill="#1E40AF"/>
+              <rect x="40" y="32" width="120" height="221" rx="0" fill="url(#authDealOffice)"/>
+              <rect x="40" y="32" width="120" height="14" fill="#1E40AF"/>
+              <rect x="56" y="54" width="28" height="22" rx="3" fill="#EFF6FF"/>
+              <rect x="96" y="54" width="28" height="22" rx="3" fill="#EFF6FF"/>
+              <rect x="56" y="88" width="28" height="22" rx="3" fill="#DBEAFE"/>
+              <rect x="96" y="88" width="28" height="22" rx="3" fill="#DBEAFE"/>
+              <rect x="56" y="122" width="28" height="22" rx="3" fill="#EFF6FF"/>
+              <rect x="96" y="122" width="28" height="22" rx="3" fill="#BFDBFE"/>
+              <rect x="56" y="156" width="28" height="22" rx="3" fill="#EFF6FF"/>
+              <rect x="96" y="156" width="28" height="22" rx="3" fill="#DBEAFE"/>
+              <rect x="56" y="190" width="28" height="22" rx="3" fill="#BFDBFE"/>
+              <rect x="96" y="190" width="28" height="22" rx="3" fill="#EFF6FF"/>
+              <rect x="78" y="221" width="36" height="32" rx="4" fill="#1E3A8A"/>
+            </g>
+            <g transform="translate(70,-28)" opacity="0.95">
+              <rect x="78" y="40" width="10" height="222" fill="#EA580C"/>
+              <rect x="72" y="36" width="22" height="12" rx="2" fill="#C2410C"/>
+              <rect x="88" y="48" width="150" height="9" fill="#F97316"/>
+              <rect x="88" y="57" width="150" height="4" fill="#C2410C"/>
+              <path d="M88 48 L88 66 L230 57 L230 52 Z" fill="#FB923C" opacity="0.55"/>
+              <rect x="228" y="44" width="8" height="22" fill="#EA580C"/>
+              <line x1="232" y1="66" x2="232" y2="140" stroke="#FDBA74" stroke-width="2"/>
+              <rect x="224" y="138" width="16" height="12" rx="2" fill="#EA580C"/>
+              <path d="M78 80 H88 M78 110 H88 M78 140 H88 M78 170 H88 M78 200 H88" stroke="#9A3412" stroke-width="2"/>
+              <g transform="translate(-36,10)" opacity="0.85">
+                <rect x="48" y="10" width="8" height="242" fill="#C2410C"/>
+                <rect x="42" y="6" width="20" height="10" rx="2" fill="#9A3412"/>
+                <rect x="56" y="18" width="130" height="8" fill="#EA580C"/>
+                <rect x="56" y="26" width="130" height="3" fill="#9A3412"/>
+                <rect x="178" y="14" width="7" height="18" fill="#C2410C"/>
+                <line x1="181" y1="32" x2="181" y2="100" stroke="#FDBA74" stroke-width="1.8"/>
+                <rect x="174" y="98" width="14" height="10" rx="2" fill="#EA580C"/>
+                <path d="M48 50 H56 M48 90 H56 M48 130 H56 M48 170 H56" stroke="#7C2D12" stroke-width="2"/>
+              </g>
+            </g>
+            <g transform="translate(120,120)">
+              <path d="M28 168 C36 108, 58 88, 88 88 C118 88, 140 108, 148 168 Z" fill="url(#authDealVest)"/>
+              <path d="M48 110 L72 168 L88 168 L64 110 Z" fill="#FDE047"/>
+              <path d="M128 110 L104 168 L88 168 L112 110 Z" fill="#FDE047"/>
+              <circle cx="88" cy="58" r="30" fill="url(#authDealSkin)"/>
+              <path d="M52 48 C58 18, 78 8, 88 8 C98 8, 118 18, 124 48 C110 40, 66 40, 52 48 Z" fill="#FACC15"/>
+              <path d="M48 48 H128" stroke="#CA8A04" stroke-width="6" stroke-linecap="round"/>
+              <rect x="70" y="70" width="36" height="10" rx="3" fill="#92400E" opacity="0.25"/>
+              <circle cx="78" cy="56" r="3.2" fill="#1E293B"/>
+              <circle cx="98" cy="56" r="3.2" fill="#1E293B"/>
+              <path d="M80 68 Q88 74 96 68" fill="none" stroke="#B45309" stroke-width="2.2" stroke-linecap="round"/>
+            </g>
+            <g transform="translate(492,124)">
+              <path d="M30 160 C38 104, 58 86, 86 86 C114 86, 134 104, 142 160 Z" fill="url(#authDealBlue)"/>
+              <rect x="62" y="112" width="48" height="10" rx="3" fill="#93C5FD"/>
+              <circle cx="86" cy="54" r="28" fill="url(#authDealSkin)"/>
+              <path d="M62 42 C68 24, 78 18, 86 18 C94 18, 104 24, 110 42 C100 36, 72 36, 62 42 Z" fill="#1E293B"/>
+              <circle cx="76" cy="52" r="3" fill="#1E293B"/>
+              <circle cx="96" cy="52" r="3" fill="#1E293B"/>
+              <path d="M78 64 Q86 70 94 64" fill="none" stroke="#B45309" stroke-width="2.2" stroke-linecap="round"/>
+              <rect x="18" y="118" width="34" height="42" rx="6" fill="#0F766E"/>
+              <rect x="24" y="124" width="22" height="8" rx="2" fill="#5EEAD4"/>
+            </g>
+            <g transform="translate(300,168)">
+              <rect x="8" y="0" width="140" height="96" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+              <rect x="8" y="0" width="140" height="22" rx="16" fill="#2563EB"/>
+              <rect x="8" y="12" width="140" height="10" fill="#2563EB"/>
+              <circle cx="26" cy="11" r="3.5" fill="#FBBF24"/>
+              <circle cx="38" cy="11" r="3.5" fill="#34D399"/>
+              <circle cx="50" cy="11" r="3.5" fill="#60A5FA"/>
+              <rect x="24" y="34" width="92" height="8" rx="4" fill="#1E3A8A"/>
+              <rect x="24" y="48" width="76" height="8" rx="4" fill="#D97706"/>
+              <rect x="24" y="62" width="84" height="8" rx="4" fill="#2563EB"/>
+              <rect x="24" y="76" width="58" height="8" rx="4" fill="#0F766E"/>
+              <circle cx="132" cy="20" r="14" fill="#16A34A"/>
+              <path d="M125 20 L130 25 L140 14" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <section class="auth__info auth__info--confianza" aria-labelledby="authConfianzaTitulo">
+      <div class="auth-info__figs" aria-hidden="true">
+        <span class="auth-fig auth-fig--blob auth-fig--tl"></span>
+        <span class="auth-fig auth-fig--ring auth-fig--tr"></span>
+        <span class="auth-fig auth-fig--slash auth-fig--bl"></span>
+        <svg class="auth-fig auth-fig--glyph auth-fig--br" viewBox="0 0 64 64" focusable="false">
+          <path d="M32 8l18 8v14c0 12-8 20-18 24-10-4-18-12-18-24V16z" fill="none" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M22 32l7 7 13-14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="shell auth__info-inner auth__info-inner--confianza">
+        <div class="auth-info__copy">
+          <h2 id="authConfianzaTitulo" class="auth-info__heading">Verificación y confianza</h2>
+          <p class="auth-info__lead">Suba lo necesario según su tipo de cuenta y deje evidencia clara para quien contrata.</p>
+          <ul class="auth-info__lista">
+            <li>
+              <span class="auth-info__lista-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="3.2"/>
+                  <path d="M5.5 19c1.2-3.2 3.6-4.8 6.5-4.8S17.3 15.8 18.5 19"/>
+                </svg>
+              </span>
+              Identidad y RUT de persona o empresa, según el perfil.
+            </li>
+            <li>
+              <span class="auth-info__lista-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 3.5h7l3 3V20.5H7z"/>
+                  <path d="M14 3.5v3h3"/>
+                  <path d="M10 12h4M10 15.5h4"/>
+                </svg>
+              </span>
+              Documentos de empresa y señales que alimentan el índice.
+            </li>
+            <li>
+              <span class="auth-info__lista-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2"/>
+                  <rect x="7" y="7" width="4" height="4"/>
+                  <rect x="13" y="7" width="4" height="4"/>
+                  <rect x="7" y="13" width="4" height="4"/>
+                  <path d="M13 13h1.5M16.5 13H18M13 16.5h2M16.5 18H18"/>
+                </svg>
+              </span>
+              Reporte con QR para validar en reuniones, obras o entregas.
+            </li>
+          </ul>
+        </div>
+        <div class="auth-info__stamp" aria-hidden="true">
+          <svg viewBox="0 0 120 120" focusable="false">
+            <circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="60" cy="60" r="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 5"/>
+            <path d="M38 62l14 14 30-32" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    </div>
+
+  <footer id="appFooter" class="app-footer">
+    <p class="app-footer__note">ServiChile facilita verificación de identidad y transparencia. No reemplaza asesoría legal ni contratos notariales.</p>
+    <nav class="app-footer__nav" aria-label="Enlaces de interés">
+      <a class="app-footer__link" href="/privacidad/">Política de privacidad</a>
+      <a class="app-footer__link" href="/terminos/">Términos y condiciones</a>
+      <a class="app-footer__link" href="/cookies/">Uso de cookies</a>
+      <a class="app-footer__link" href="/index.html">Inicio</a>
+      <a class="app-footer__link" href="https://www.sernac.cl" target="_blank" rel="noopener noreferrer">SERNAC</a>
+      <a class="app-footer__link" href="https://www.sernamyp.cl" target="_blank" rel="noopener noreferrer">SERNAMYP</a>
+      <a class="app-footer__link" href="https://www.chileatiende.gob.cl" target="_blank" rel="noopener noreferrer">ChileAtiende</a>
+    </nav>
+  </footer>
+  </div>
+
+  <header class="app-header" hidden>
+    <div class="app-header__columna shell">
+    <button id="historyBtn" class="menu-toggle" type="button" aria-label="Abrir menú" aria-controls="historyPanel" aria-expanded="false" hidden>
+      <span class="menu-toggle__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </span>
+    </button>
+      <div class="brand">
+        <span class="brand__mark">S</span>
+        <h1 class="brand__title">ServiChile</h1>
+      </div>
+      <p class="brand__subtitle">Transparencia de proveedores B2B</p>
+      <div class="header-actions">
+        <button id="logoutBtn" class="install-btn" type="button" hidden>Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="historyOverlay" class="history-overlay" hidden></div>
+  <aside id="historyPanel" class="history" aria-label="Menú principal" aria-hidden="true">
+    <div class="history__head">
+      <h2 class="history__title">Menú</h2>
+      <button id="historyClose" class="history__close" type="button" aria-label="Cerrar menú">×</button>
+    </div>
+    <nav id="historyMenu" class="history-menu" aria-label="Menú principal">
+      <button class="history-menu__item history-menu__item--active" type="button" data-view="mapa" aria-current="page">
+        <svg class="history-menu__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3z"/><path d="M8 3v15M16 6v15"/></svg>
+        <span>Explorar</span>
+      </button>
+      <button class="history-menu__item" type="button" data-view="reportes">
+        <svg class="history-menu__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3z"/><path d="M20 14v6"/><path d="M14 20h3"/></svg>
+        <span>Reportes</span>
+      </button>
+      <button class="history-menu__item" type="button" data-view="subir-confianza">
+        <svg class="history-menu__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/><path d="M4 19h16"/></svg>
+        <span>Verificación</span>
+      </button>
+      <button class="history-menu__item" type="button" data-view="perfil">
+        <svg class="history-menu__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Perfil</span>
+      </button>
+    </nav>
+  </aside>
+
+  <main id="main" class="main shell" hidden>
+    <section id="mapView" class="view">
+      <div id="marketList" class="market">
+        <div class="market__head">
+          <h2 class="section-heading">Proveedores</h2>
+          <p class="section-lead">Directorio B2B de proveedores en tecnología, industria, construcción y servicios profesionales.</p>
+          <div id="marketProgreso" class="market__progreso"></div>
+          <p class="market__grupo-label">Tipo de proveedor</p>
+          <div id="marketJobs" class="market__jobs" role="group" aria-label="Tipo de proveedor"></div>
+          <div class="market__search">
+            <input id="marketSearch" class="field__input" type="search" placeholder="Buscar por nombre, servicio o referencia..." maxlength="80" />
+          </div>
+          <div id="marketOferta" class="market__oferta"></div>
+          <p class="market__count" id="marketCount"></p>
+        </div>
+        <div id="marketGrid" class="market__grid"></div>
+        <p id="marketStatus" class="status-text" aria-live="polite"></p>
+      </div>
+      <div id="marketDetail" class="market-detalle" hidden></div>
+    </section>
+
+    <section id="perfilView" class="view perfil" hidden>
+      <header class="perfil__head">
+        <h2 class="section-heading perfil__titulo">Mi perfil</h2>
+        <p class="section-lead perfil__lead">Datos de cuenta y estado de verificación para contrataciones B2B.</p>
+      </header>
+      <div id="perfilStatus" class="status-text" aria-live="polite"></div>
+
+      <div class="perfil__grid">
+        <form id="perfilForm" class="form config-card perfil__panel perfil__panel--cuenta">
+          <h3 class="perfil__panel-titulo">Datos de cuenta</h3>
+          <div class="perfil__campos">
+            <div class="field">
+              <label class="field__label" for="perfilNombre">Nombre</label>
+              <input id="perfilNombre" class="field__input" type="text" disabled />
+            </div>
+            <div class="field">
+              <label class="field__label" for="perfilCorreo">Correo</label>
+              <input id="perfilCorreo" class="field__input" type="email" disabled />
+            </div>
+            <div class="field">
+              <label class="field__label" for="perfilEdad">Edad</label>
+              <input id="perfilEdad" class="field__input" type="number" min="14" max="120" inputmode="numeric" />
+            </div>
+            <div class="field">
+              <label class="field__label" for="perfilTelefono">Teléfono</label>
+              <input id="perfilTelefono" class="field__input" type="tel" maxlength="30" inputmode="tel" autocomplete="tel" placeholder="+56 9 1234 5678" />
+            </div>
+            <div class="field perfil__campo--wide">
+              <label class="field__label" for="perfilRut">RUT</label>
+              <input id="perfilRut" class="field__input" type="text" maxlength="12" inputmode="text" autocomplete="off" placeholder="12.345.678-5" />
+            </div>
+          </div>
+          <button id="perfilGuardar" class="submit-btn perfil__guardar" type="submit" disabled>Guardar cambios</button>
+          <p id="perfilFormStatus" class="status-text" role="alert" aria-live="assertive"></p>
+        </form>
+
+        <div class="config-card perfil__panel perfil__panel--confianza">
+          <h3 class="perfil__panel-titulo">Estado de confianza</h3>
+          <dl id="perfilReporte" class="perfil-datos"></dl>
+        </div>
+      </div>
+
+      <div class="config-card perfil__panel perfil__panel--empresas" id="perfilEmpresaRaiz"></div>
+
+      <div class="config-card perfil__panel perfil__panel--cuenta-acciones">
+        <h3 class="perfil__panel-titulo">Cuenta</h3>
+        <div class="perfil__cuenta-acciones">
+          <button id="perfilLogout" class="submit-btn perfil__logout" type="button">Cerrar sesión</button>
+          <button id="perfilEliminar" class="perfil-danger" type="button">Cerrar cuenta</button>
+        </div>
+        <form id="perfilEliminarForm" class="perfil-eliminar" hidden>
+          <p class="field__hint">Se borran su cuenta, su perfil y sus trabajos. No se puede deshacer.</p>
+          <div class="field">
+            <label class="field__label" for="perfilEliminarPass">Confirme su contraseña</label>
+            <input id="perfilEliminarPass" class="field__input" type="password" autocomplete="current-password" maxlength="128" required />
+          </div>
+          <button class="perfil-danger" type="submit">Eliminar mi cuenta</button>
+          <button id="perfilEliminarCancelar" class="history__clear" type="button">No eliminar</button>
+          <p id="perfilEliminarStatus" class="status-text" role="alert" aria-live="assertive"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="verifyView" class="view" hidden>
+      <h2 class="section-heading">Reportes</h2>
+      <div id="reporteRaiz" class="reporte-raiz"></div>
+    </section>
+
+    <section id="subirConfianzaView" class="view" hidden>
+      <h2 class="section-heading">Verificación</h2>
+      <div id="subirConfianzaRaiz" class="confianza"></div>
+    </section>
+
+  </main>
+
+  <div id="reportePrintPortal" class="reporte-print-portal" hidden aria-hidden="true"></div>
+
+  <script src="/js/footer.js?v=10">
+</script>
+
+  <script defer src="js/data/categorias.js?v=218">
+</script>
+  <script defer src="js/data/oferta.js?v=218">
+</script>
+  <script defer src="js/core/security.js?v=218">
+</script>
+  <script defer src="js/compliance.js?v=218">
+</script>
+  <script defer src="js/core/auth.js?v=219">
+</script>
+  <script defer src="js/modules/progreso-cuenta.js?v=225">
+</script>
+  <script defer src="js/modules/market-monetizacion.js?v=219">
+</script>
+  <script defer src="js/modules/market-pago-store.js?v=218">
+</script>
+  <script defer src="js/modules/market-contacto.js?v=218">
+</script>
+  <script defer src="js/modules/trabajos.js?v=219">
+</script>
+  <script defer src="js/modules/market.js?v=226">
+</script>
+  <script defer src="js/modules/indice-desglose.js?v=218">
+</script>
+  <script defer src="js/app.js?v=219">
+</script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js?v=' + (window.SERVICHILE_APP_VERSION || '219')).catch(function () {});
+    }
+</script>
+</body>
+</html>

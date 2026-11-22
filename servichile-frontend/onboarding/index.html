@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bienvenida a ServiChile. Cuéntanos un poco sobre ti.">
+  <meta name="theme-color" content="#2563EB">
+  <title>ServiChile - Bienvenida</title>
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%232563EB'/%3E%3Ctext x='50' y='65' font-size='45' text-anchor='middle' fill='white' font-family='Arial'%3ES%3C/text%3E%3C/svg%3E">
+  <script>window.SERVICHILE_APP_VERSION = '221';
+</script>
+  <link rel="stylesheet" href="../css/styles.css?v=268">
+</head>
+<body>
+  <main class="onboarding">
+    <div class="onboarding__shell">
+      <header class="onboarding__header">
+        <div class="onboarding__brand">
+          <span class="brand__mark">S</span>
+          <span class="onboarding__brand-name">ServiChile</span>
+        </div>
+        <div id="progress" class="onboarding__progress" aria-hidden="true"></div>
+      </header>
+
+      <div id="deck" class="onboarding__deck" aria-live="polite"></div>
+
+      <footer class="onboarding__footer">
+        <button id="prevBtn" class="onboarding__nav" type="button" hidden>Atrás</button>
+        <p id="stepStatus" class="onboarding__status" aria-live="polite"></p>
+      </footer>
+      <footer id="appFooter" class="app-footer">
+        <p class="app-footer__note">ServiChile facilita verificación de identidad y transparencia. No reemplaza asesoría legal ni contratos notariales.</p>
+        <nav class="app-footer__nav" aria-label="Enlaces de interés">
+          <a class="app-footer__link" href="/privacidad/">Política de privacidad</a>
+          <a class="app-footer__link" href="/terminos/">Términos y condiciones</a>
+          <a class="app-footer__link" href="/cookies/">Uso de cookies</a>
+          <a class="app-footer__link" href="/index.html">Inicio</a>
+          <a class="app-footer__link" href="https://www.sernac.cl" target="_blank" rel="noopener noreferrer">SERNAC</a>
+          <a class="app-footer__link" href="https://www.sernamyp.cl" target="_blank" rel="noopener noreferrer">SERNAMYP</a>
+          <a class="app-footer__link" href="https://www.chileatiende.gob.cl" target="_blank" rel="noopener noreferrer">ChileAtiende</a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <script src="/js/footer.js?v=6">
+</script>
+  <script src="../js/core/security.js?v=218">
+</script>
+  <script src="../js/core/auth.js?v=219">
+</script>
+  <script src="../js/modules/progreso-cuenta.js?v=218">
+</script>
+  <script src="../js/onboarding.js?v=218">
+</script>
+</body>
+</html>

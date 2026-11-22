@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+var/
+db/migrations/
+*.pdf
+!docs/*.pdf
+.DS_Store
+.ruff_cache/

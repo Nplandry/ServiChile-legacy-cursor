@@ -1,0 +1,305 @@
+
+
+a.brand {
+  text-decoration: none;
+  color: inherit;
+}
+
+.legal {
+  flex: 1 0 auto;
+  width: min(40rem, calc(100% - 2 * var(--page-pad)));
+  margin: var(--space-lg) auto 0;
+}
+
+.legal .section-heading {
+  color: var(--color-primary-dark);
+}
+
+.legal .section-lead {
+  color: var(--color-muted);
+  margin-top: 0;
+}
+
+.legal h2 {
+  margin: var(--space-lg) 0 var(--space-xs);
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+}
+
+.legal p,
+.legal li {
+  color: var(--color-text);
+}
+
+.legal p a,
+.legal li a {
+  color: var(--color-primary);
+  font-weight: 650;
+}
+
+.legal p a:hover,
+.legal p a:focus-visible,
+.legal li a:hover,
+.legal li a:focus-visible {
+  color: var(--color-primary-dark);
+}
+
+.legal ul {
+  margin: var(--space-sm) 0;
+  padding-left: 1.2rem;
+}
+
+.legal li::marker {
+  color: var(--color-primary);
+}
+
+.legal li + li {
+  margin-top: 0.35rem;
+}
+
+.legal .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.legal .acciones a.submit-btn {
+  width: auto;
+  min-width: 10rem;
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.legal .acciones a.submit-btn:hover,
+.legal .acciones a.submit-btn:focus-visible {
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+  outline: 3px solid var(--color-secondary-strong);
+  outline-offset: 2px;
+}
+
+.legal--404 {
+  text-align: center;
+}
+
+.legal--404 .code {
+  display: inline-block;
+  margin: 0 0 var(--space-sm);
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--color-secondary);
+  color: var(--color-primary-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.legal--404 .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.legal--404 a.submit-btn:not(.submit-btn--secondary) {
+  width: auto;
+  min-width: 10rem;
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.legal--404 a.submit-btn--secondary {
+  width: auto;
+  min-width: 10rem;
+  color: var(--color-primary-dark);
+}
+
+.legal--404 a.submit-btn:not(.submit-btn--secondary):hover,
+.legal--404 a.submit-btn:not(.submit-btn--secondary):focus-visible {
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+  outline: 3px solid var(--color-secondary-strong);
+  outline-offset: 2px;
+}
+
+.legal--404 .ruta {
+  margin-top: var(--space-md);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  word-break: break-all;
+}
+
+@keyframes legal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.7rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes legal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes legal-mark {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+body:has(.legal) .app-header .brand__mark {
+  animation: legal-mark 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body:has(.legal) .app-header .brand__title {
+  animation: legal-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+body:has(.legal) .app-header .brand__subtitle {
+  animation: legal-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+.legal > * {
+  animation: legal-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.legal > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.legal > *:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.legal > *:nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+.legal > *:nth-child(4) {
+  animation-delay: 0.28s;
+}
+
+.legal > *:nth-child(5) {
+  animation-delay: 0.34s;
+}
+
+.legal > *:nth-child(6) {
+  animation-delay: 0.4s;
+}
+
+.legal > *:nth-child(7) {
+  animation-delay: 0.46s;
+}
+
+.legal > *:nth-child(8) {
+  animation-delay: 0.52s;
+}
+
+.legal > *:nth-child(9) {
+  animation-delay: 0.58s;
+}
+
+.legal > *:nth-child(n + 10) {
+  animation-delay: 0.64s;
+}
+
+.legal li {
+  animation: legal-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.legal li:nth-child(1) {
+  animation-delay: 0.36s;
+}
+
+.legal li:nth-child(2) {
+  animation-delay: 0.42s;
+}
+
+.legal li:nth-child(3) {
+  animation-delay: 0.48s;
+}
+
+.legal li:nth-child(4) {
+  animation-delay: 0.54s;
+}
+
+.legal li:nth-child(5) {
+  animation-delay: 0.6s;
+}
+
+.legal li:nth-child(n + 6) {
+  animation-delay: 0.66s;
+}
+
+.legal p a,
+.legal li a {
+  transition: color 0.2s ease, text-underline-offset 0.2s ease;
+  text-underline-offset: 0.12em;
+}
+
+.legal p a:hover,
+.legal p a:focus-visible,
+.legal li a:hover,
+.legal li a:focus-visible {
+  text-underline-offset: 0.22em;
+}
+
+.legal .acciones a.submit-btn {
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.legal .acciones a.submit-btn:hover,
+.legal .acciones a.submit-btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28);
+}
+
+body:has(.legal) .app-footer {
+  animation: legal-fade 0.55s ease 0.45s both;
+}
+
+body:has(.legal) .app-footer__link {
+  transition: color 0.2s ease, text-underline-offset 0.2s ease;
+  text-underline-offset: 0.12em;
+}
+
+body:has(.legal) .app-footer__link:hover,
+body:has(.legal) .app-footer__link:focus-visible {
+  text-underline-offset: 0.22em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(.legal) .app-header .brand__mark,
+  body:has(.legal) .app-header .brand__title,
+  body:has(.legal) .app-header .brand__subtitle,
+  .legal > *,
+  .legal li,
+  body:has(.legal) .app-footer {
+    animation: none;
+  }
+
+  .legal .acciones a.submit-btn {
+    transition: none;
+  }
+
+  .legal .acciones a.submit-btn:hover,
+  .legal .acciones a.submit-btn:focus-visible {
+    transform: none;
+    box-shadow: none;
+  }
+}
